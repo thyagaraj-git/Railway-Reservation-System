@@ -1,5 +1,6 @@
 package train.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,17 @@ public class TrainController {
 	public Optional<Trains> getTrain(@PathVariable String trainid){
 		return trainrepo.findById(trainid);
 	}
+	
+	 @GetMapping("/findAllTrains")
+	    public List<Trains> getTrains(){
+		return trainrepo.findAll();
 		
+	}
+//	    @GetMapping("/findbyId/{trainid}")
+//	    public Optional<Trains> getTrains(@PathVariable String trainid){
+//		return trainrepo.findById(trainid);
+//	}
+	
 	@DeleteMapping("/delete/{trainid}")
 	public String deleteTrain (@PathVariable String trainid) {
 		trainrepo.deleteById(trainid);

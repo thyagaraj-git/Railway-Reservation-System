@@ -7,16 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
 @EnableDiscoveryClient
-//@RestController
-//@RequestMapping("/trainservice")
+@EnableSwagger2
 public class TrainServiceApplication {
 	
-//	@GetMapping("/train")
-//	public String show() {
-//		return "Hello World";
-//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(TrainServiceApplication.class, args);

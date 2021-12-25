@@ -1,4 +1,4 @@
-package order.server.model;
+package user.service.model;
 
 import org.springframework.data.annotation.Id;
 
@@ -18,6 +18,10 @@ public class BookingOrder {
 	private String date;
 	private int quantity;
 	
+	public BookingOrder() {
+		super();
+	}
+
 	public BookingOrder(String id, String train, String startStation, String endStation, String name, String age,
 			String gender, String creditNo, String address, String bankname, String date,int quantity) {
 		super();
@@ -33,10 +37,6 @@ public class BookingOrder {
 		this.bankname = bankname;
 		this.date = date;
 		this.quantity=quantity;
-	}
-
-	public BookingOrder() {
-		super();
 	}
 
 	public int getQuantity() {

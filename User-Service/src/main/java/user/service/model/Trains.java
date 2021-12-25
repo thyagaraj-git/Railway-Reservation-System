@@ -11,27 +11,28 @@ public class Trains {
 	private String trainName;
 	private String startStation;
 	private String endStation;
-	
-	
+	private int fare;
+
 public Trains() {
 	
 }
 
 
-public Trains(String trainid, String trainName, String startStation, String endStation) {
+public Trains(String trainid, String trainName, String startStation, String endStation,int fare) {
 	super();
 	this.trainid = trainid;
 	this.trainName = trainName;
 	this.startStation = startStation;
 	this.endStation = endStation;
+	this.fare=fare;
 }
 
 public String getTrainid() {
 	return trainid;
 }
 
-public void setTrainid(String trainid2) {
-	this.trainid = trainid2;
+public void setTrainid(String trainid) {
+	this.trainid = trainid;
 }
 
 public String getTrainName() {
@@ -57,4 +58,13 @@ public String getEndStation() {
 public void setEndStation(String endStation) {
 	this.endStation = endStation;
 }
+
+public int getFare() {
+	return fare;
+}
+
+public void setFare(int fare) {
+	this.fare = fare;
+}
+
 }

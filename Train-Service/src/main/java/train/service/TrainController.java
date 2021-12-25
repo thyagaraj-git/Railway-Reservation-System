@@ -24,8 +24,7 @@ public class TrainController {
 
 	@Autowired
 	private TrainRepository trainrepo;
-//	@Autowired
-//	private TrainService trainservice;
+
 	
 	@PostMapping("/addTrain")
 	public String saveTrain(@RequestBody Trains trainid) {
@@ -33,26 +32,27 @@ public class TrainController {
 	return "Added train with id :  " + trainid.getTrainid();
     }
 	
-	@GetMapping("{trainid}")
-	public Optional<Trains> getTrain(@PathVariable String trainid){
-		return trainrepo.findById(trainid);
-	}
-	
+//	@GetMapping("{trainid}")
+//	public Optional<Trains> getTrain(@PathVariable String trainid){
+//		return trainrepo.findById(trainid);
+//	}
+//	
 	 @GetMapping("/findAllTrains")
 	    public List<Trains> getTrains(){
 		return trainrepo.findAll();
 		
 	}
-//	    @GetMapping("/findbyId/{trainid}")
-//	    public Optional<Trains> getTrains(@PathVariable String trainid){
-//		return trainrepo.findById(trainid);
-//	}
+	    @GetMapping("/findbyId/{trainid}")
+	    public Optional<Trains> getTrains(@PathVariable String trainid){
+		return trainrepo.findById(trainid);
+	}
 	
 	@DeleteMapping("/delete/{trainid}")
 	public String deleteTrain (@PathVariable String trainid) {
 		trainrepo.deleteById(trainid);
 		return "Train deleted with id : "+trainid;
     }
+	
 	@PutMapping("/update/{trainid}")
 	public Trains updateTrain(@PathVariable("trainid") String trainid,@RequestBody Trains t ) {
 		t.setTrainid(trainid);

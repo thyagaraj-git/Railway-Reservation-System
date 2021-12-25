@@ -28,38 +28,32 @@ public class adminController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@RequestMapping(value="/admin/{userId}")
-	public Trains getTrain(@PathVariable int userId) {
-		Trains traindetails= restTemplate.getForObject("http://localhost:8092/adminControl/"+userId	, Trains.class);
+	@RequestMapping(value="/admin/{Id}")
+	public Trains getTrain(@PathVariable String Id) {
+		Trains traindetails= restTemplate.getForObject("http://localhost:8092/adminControl/"+Id	, Trains.class);
 				return traindetails;
 	}
-	 @RequestMapping(value = "/admin/create", method = RequestMethod.POST)
-	   public String create(@RequestBody Trains train) {
-	      HttpHeaders headers = new HttpHeaders();
-	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-	      HttpEntity<Trains> entity = new HttpEntity<Trains>(train,headers);
-	      
-	      return restTemplate.exchange(
-	         "http://localhost:8092/adminControl/addTrain", HttpMethod.POST, entity, String.class).getBody();
-	   }
-	   
+	
+	
+	@RequestMapping(value="/admin/create",method = RequestMethod.POST)
+	public String create(@RequestBody Trains train) {
+		 HttpEntity<Trains> entity = new HttpEntity<Trains>(train);
+		 String addTrain= restTemplate.exchange("http://localhost:8092/adminControl/addTrain", HttpMethod.POST, entity, String.class).getBody();
+		 return addTrain;
+	}
+
+	
 	   @RequestMapping(value = "/admin/update/{id}", method = RequestMethod.PUT) 
 	   public String updateTrain(@PathVariable("id") String id, @RequestBody Trains train) {
-	      HttpHeaders headers = new HttpHeaders();
-	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-	      HttpEntity<Trains> entity = new HttpEntity<Trains>(train,headers);
-	      
-	      return restTemplate.exchange(
-	         "http://localhost:8092/adminControl/update/"+id, HttpMethod.PUT, entity, String.class).getBody();
+	      return restTemplate.postForObject(
+	         "http://localhost:8092/adminControl/update/"+id, train, String.class);
 	   }
 	   
+	   
 	   @RequestMapping(value = "/admin/delete/{id}", method = RequestMethod.DELETE)
-	   public String deleteTrain(@PathVariable("id") String id) {
-	      HttpHeaders headers = new HttpHeaders();
-	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-	      HttpEntity<Trains> entity = new HttpEntity<Trains>(headers);
-	      
-	      return restTemplate.exchange(
-	         "http://localhost:8092/adminControl/delete/"+id, HttpMethod.DELETE, entity, String.class).getBody();
+	   public Boolean deleteTrain(@PathVariable("id") String id) {
+	      restTemplate.delete(
+	         "http://localhost:8092/adminControl/delete/"+id );
+	      return true;
 	   }
 	}
